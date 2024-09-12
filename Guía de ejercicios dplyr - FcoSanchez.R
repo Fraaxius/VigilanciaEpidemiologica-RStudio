@@ -134,6 +134,9 @@ datos <- data %>%
 
 # apoyandose en los datos, definir si las siguientes afirmaciones son verdaderas o falsas:
 
+install.packages("ggplot2")
+library("ggplot2")
+
 # 1) De las mujeres que han consumido pbc, la mayoría ha realizado un aborto.
 
 mujeres_pbc <- datos %>%
