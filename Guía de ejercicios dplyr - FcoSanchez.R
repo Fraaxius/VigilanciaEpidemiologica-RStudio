@@ -140,8 +140,10 @@ library("ggplot2")
 # 1) De las mujeres que han consumido pbc, la mayoría ha realizado un aborto.
 
 mujeres_pbc <- datos %>%
-  filter(PBC == "Sí", Sexo == "Mujer") %>% 
-  count(Aborto)
+  filter(PBC == "Sí", Sexo == "Mujer", !is.na(Aborto)) %>% 
+  count(Aborto) %>%
+  ggplot(., aes(x = Aborto, y = n)) +
+  geom_bar(stat = "identity")
 mujeres_pbc
 
 # Sí, verdadero... Hay 3 mujeres que si han realizado abortos, mientras que 2
@@ -150,9 +152,15 @@ mujeres_pbc
 # 2) Las personas que han consumido alcohol son en promedio mas jovenes que las que no han consumido.
 
 edad_promedio <- datos %>%
+  filter(!is.na(Alcohol)) %>%
   group_by(Alcohol) %>%
-  summarise(edad_promedio = mean(Edad, na.rm =T))
+  summarise(edad_promedio = mean(Edad, na.rm =T)) %>%
+  ggplot(., aes(x = Alcohol, y = edad_promedio)) +
+  geom_bar(stat = "identity")
 edad_promedio
+
+ggplot(datos, aes(x = Alcohol, y = Edad)) +
+  geom_boxplot()
 
 # Verdadero, ya que si comparamos los resultados, las personas que consumen
 # alcohol, es mayor que las personas que no consumen.
@@ -165,6 +173,12 @@ menores_de_edad
 menores_marihuana <- menores_de_edad %>%
   summarise(menores_marihuana = mean(Marihuana == "Sí", na.rm = TRUE))
 menores_marihuana
+
+datos %>%
+  filter(tramo_etario == "Tramo 1") %>%
+  count(Marihuana) %>%
+  ggplot(., aes(x = Marihuana, y = n)) +
+  geom_bar(stat = "identity")
 
 # Falso, ya que los menores que si consumen marihuana representan al
 # 13,1%.
