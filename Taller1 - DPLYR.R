@@ -1,5 +1,7 @@
 # TALLER 1
 
+# Nombres: Fernanda Pérez y Francisco Sánchez
+
 # IMPORTAR LA BASE DE DATOS: JÓVENES (RDS)
 
 install.packages("dplyr")
@@ -62,9 +64,9 @@ datos %>%
 
 # Gráfico de barras del número total de parejas sexuales por sexo con valores en las barras
 ggplot(datos %>% filter(!is.na(n_psexuales)), aes(x = Sexo, y = n_psexuales, fill = Sexo)) +
-  geom_bar(stat = "summary", fun = "mean") +  # Usamos "mean" para mostrar el promedio
+  geom_bar(stat = "summary", fun = "mean") + 
   geom_text(stat = "summary", fun = "mean", aes(label = round(..y.., 1)), 
-            vjust = -0.5, size = 5) +  # Añadiendo los valores encima de las barras
+            vjust = -0.5, size = 5) + 
   labs(title = "Promedio del número de parejas sexuales por sexo",
        x = "Sexo",
        y = "Promedio de parejas sexuales") +
@@ -95,9 +97,9 @@ promedios <- datos %>%
 
 # Gráfico de barras del número promedio de parejas sexuales por tipo de consumo con los valores encima
 ggplot(datos %>% filter(!is.na(n_psexuales), !is.na(Consumo)), aes(x = Consumo, y = n_psexuales, fill = Consumo)) +
-  geom_bar(stat = "summary", fun = "mean") +  # Usamos "mean" para mostrar el promedio
+  geom_bar(stat = "summary", fun = "mean") + 
   geom_text(data = promedios, aes(x = Consumo, y = mean_psexuales, label = round(mean_psexuales, 1)), 
-            vjust = -0.5, size = 5) +  # Ajustar posición y tamaño del texto
+            vjust = -0.5, size = 5) + 
   labs(title = "Promedio de parejas sexuales entre policonsumidores y monoconsumidores",
        x = "Tipo de consumo",
        y = "Promedio de parejas sexuales") +
@@ -125,7 +127,7 @@ conteos <- datos %>%
 ggplot(datos %>% filter(!is.na(Consumo)), aes(x = Sexo, fill = Consumo)) +
   geom_bar(position = "dodge") +
   geom_text(data = conteos, aes(x = Sexo, y = count, label = count, group = Consumo),
-            position = position_dodge(width = 0.9), vjust = -0.5, size = 4) +  # Ajustar la posición y tamaño del texto
+            position = position_dodge(width = 0.9), vjust = -0.5, size = 4) + 
   labs(title = "Distribución de Policonsumidores por Sexo",
        x = "Sexo",
        y = "Cantidad de personas") +
