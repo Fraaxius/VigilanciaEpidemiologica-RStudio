@@ -73,8 +73,9 @@ ggplot(datos %>% filter(!is.na(n_psexuales)), aes(x = Sexo, y = n_psexuales, fil
   theme_minimal() +
   scale_fill_manual(values = c("#e4cff5", "#e0f5cf"))
 
-### RESPUESTA:  Verdadero , los hombres declaran tener más parejas sexuales que las mujeres.
-
+### RESPUESTA:  Verdadero , los hombres declaran tener más parejas sexuales que las mujeres,
+# en el grafico se puede observar que el promedio de parejas en hombres es de 2.22, a diferencia
+# de las mujeres que poseeen 1.46.
 
 
 # 2) Las personas que consumen dos sustancias o más (policonsumo), tienden
@@ -94,6 +95,7 @@ promedios <- datos %>%
   filter(!is.na(n_psexuales), !is.na(Consumo)) %>%
   group_by(Consumo) %>%
   summarise(mean_psexuales = mean(n_psexuales))
+head(promedios)
 
 # Gráfico de barras del número promedio de parejas sexuales por tipo de consumo con los valores encima
 ggplot(datos %>% filter(!is.na(n_psexuales), !is.na(Consumo)), aes(x = Consumo, y = n_psexuales, fill = Consumo)) +
@@ -107,8 +109,8 @@ ggplot(datos %>% filter(!is.na(n_psexuales), !is.na(Consumo)), aes(x = Consumo, 
   scale_fill_manual(values = c("#9999ff", "#ff0000"))
 
 
-### RESPUESTA: Verdadero, las personas con policonsumo tienden a tener más parejas sexuales que las personas
-### que tienen un monoconsumo 
+### RESPUESTA: Verdadero, las personas con policonsumo en promedio tiene 2.37 parejas sexuales,
+# mientras que las personas con monoconsumo tienen en promedio 1.52 parejas sexuales.
 
 # 3) Hay más mujeres policonsumidoras que hombres policonsumidores
 
@@ -136,4 +138,5 @@ ggplot(datos %>% filter(!is.na(Consumo)), aes(x = Sexo, fill = Consumo)) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))
 
 
-### RESPUESTA: Falso, Hay más hombres policonsumidores que mujeres policonsumidoras. ####
+### RESPUESTA: Falso, se puede observar en el gráfico que hay menos mujeres policonsumidoras,
+# en comparación con los hombres que son policonsumidores.
