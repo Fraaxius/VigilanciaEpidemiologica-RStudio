@@ -28,10 +28,17 @@ datos <- data %>%
     Edad = EDAD,
     Sexo = SEXO,
     Alcohol = P76_1,
+    inicio_sexual = P78,
     inicio_actsexual = P81,
     p_sexualesaño = P82,
   )
 head(datos)
+
+datos %>%
+  filter(inicio_actsexual == 0)
+
+datos <- datos %>%
+  mutate(inicio_actsexual = na_if(inicio_actsexual, 99))
 
 # Eliminar NA's
 datos <- datos %>%
